@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import MoneyForm from "./MoneyForm";
+import Roster from "./Roster";
+import { TeamStoreProvider } from "./TeamStore";
+import Athlete from "./Athlete";
+import TeamNameInfo from "./TeamNameInfo";
+
+const lebronJames = new Athlete("Lebron James", 37, 9);
+const stephCurry = new Athlete("Steph Curry", 34, 5);
+
+const getPlayersFromBackend = () => [lebronJames, stephCurry];
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <TeamStoreProvider players={getPlayersFromBackend()}>
+          <TeamNameInfo />
+          <Roster />
+          <MoneyForm />
+        </TeamStoreProvider>
       </header>
     </div>
   );
 }
 
 export default App;
+
